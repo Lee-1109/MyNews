@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.model.Reader">
+    <resultMap type="com.model.Reader" id="reader">
+        <id column="uid" property="uid"/>
+        <result column="password" property="password"/>
+        <result column="gender" property="gender"/>
+        <result column="username" property="username"/>
+        <result column="tel" property="tel"/>
+    </resultMap>
+
+    <select id="selectList" resultMap="reader">
+       select uid, password, gender, username, tel from reader order by uid;
+	</select>
+
+    <select id="selectListByPage" resultMap="reader">
+        select uid, password, gender, username, tel from reader limit #{startPos},#{pageSize}
+    </select>
+
+    <select id="selectByCondition" resultMap="reader">
+        select uid, password, gender, username, tel
+        from reader r
+        where r.username like #{condition} or r.uid like #{condition} or r.gender like #{condition}
+            or r.tel like #{condition}
+    </select>
+
+    <select id="selectByConditionByPage" resultMap="reader">
+        select uid, password, gender, username, tel
+        from reader r
+        where r.username like #{condition} or r.uid like #{condition} or r.gender like #{condition}
+           or r.tel like #{condition}  limit #{startPos},#{pageSize}
+    </select>
+
+</mapper>

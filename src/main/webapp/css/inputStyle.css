@@ -1,0 +1,13 @@
+.input,.select{
+    border-width: 1px;
+    border-radius: 100px;
+    border-color: black;
+    text-align: center;
+    outline: medium;
+}
+.input:focus,.select:focus{
+    border-width: 1px;
+    border-radius: 100px;
+    outline: medium;
+    border-color: orangered;
+}

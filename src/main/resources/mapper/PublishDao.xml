@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.model.Publish">
+    <resultMap type="com.model.Publish" id="publish">
+        <id column="NID" property="nid"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="NAME" property="name"/>
+        <result column="ADDRESS" property="address"/>
+    </resultMap>
+
+    <select id="selectList" resultMap="publish">
+        select NID, PASSWORD, NAME, ADDRESS from publish
+	</select>
+    <select id="listPublishByPage" resultMap="publish">
+        select NID, PASSWORD, NAME, ADDRESS from publish limit #{startPos},#{pageSize}
+    </select>
+
+    <select id="selectByCondition" resultMap="publish">
+        select NID, PASSWORD, NAME, ADDRESS from publish p
+        where p.NAME like #{condition} or p.ADDRESS like #{condition}
+    </select>
+
+    <select id="selectByConditionByPage" resultMap="publish">
+        select NID, PASSWORD, NAME, ADDRESS from publish p
+        where p.NAME like #{condition} or p.ADDRESS like #{condition}
+        limit #{startPos},#{pageSize}
+    </select>
+</mapper>

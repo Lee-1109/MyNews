@@ -1,0 +1,45 @@
+body{
+    background-color: deepskyblue;
+}
+header{
+    font-family: 楷体, serif;
+    font-size: x-large;
+    background-color: bisque;
+    width: 350px;
+    height: 20px;
+    text-align: center;
+    margin: auto;
+}
+.user{
+    top: 200px;
+    background-color: cornflowerblue;
+    text-align: center;
+    width: 350px;
+    height: 100px;
+    margin: auto;
+}
+table{
+    margin: auto;
+}
+table tr td{
+    border: none ;
+    border-radius: 100px;
+    text-align: center;
+    font-family: AcadEref, serif;
+    font-size: large;
+    background-color: aliceblue;
+
+}
+input,select{
+    border-width: 1px;
+    border-color: black;
+    border-radius: 100px;
+    text-align: center;
+    outline: medium;
+}
+input:focus,select:focus{
+    border-width: 1px;
+    border-radius: 100px;
+    outline: medium;
+    border-color: orangered;
+}

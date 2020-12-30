@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.model.Admin">
+    <resultMap type="com.model.Admin" id="admin">
+        <id column="ID" property="id"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="GRANTS" property="grants"/>
+    </resultMap>
+
+
+    <select id="selectOne" parameterType="com.model.Admin" resultMap="admin" >
+        select ID,PASSWORD,GRANTS from admin a where a.ID= #{id}
+    </select>
+    <select id="selectList" resultMap="admin" >
+        select ID,PASSWORD,GRANTS from admin order by GRANTS
+    </select>
+    <select id="selectByCondition" resultMap="admin">
+        select ID,PASSWORD,GRANTS from admin
+        where ID like #{condition} or GRANTS like #{condition}
+    </select>
+    <select id="selectByConditionByPage" resultMap="admin">
+        select ID,PASSWORD,GRANTS from admin
+        where ID like #{condition} or GRANTS like #{condition} limit #{startPos},#{pageSize}
+    </select>
+<!--自此开始实现分页查询-->
+    <select id="selectAdminByPage"  resultMap="admin" >
+        select ID,PASSWORD,GRANTS from admin limit #{startPos},#{pageSize}
+    </select>
+
+    <select id="selectAdminCount" resultType="java.lang.Long">
+        select count(*) from admin
+    </select>
+
+    <!--插入审核员-->
+    <insert id="insertDefault">
+        insert into admin(ID,PASSWORD) values(#{id},#{password})
+    </insert>
+    <!--插入超级管理员-->
+    <insert id="insertSuper">
+        insert into admin values(#{id},#{password},0)
+    </insert>
+    <!--插入系统管理员-->
+    <insert id="insertAdmin">
+        insert into admin values(#{id},#{password},1)
+    </insert>
+
+    <!--删除系统管理员-->
+    <delete id="deleteAdmin">
+        delete from admin where ID=#{adminId}
+    </delete>
+
+</mapper>

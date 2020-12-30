@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- PropertyPlaceholderConfigurer类中有个locations属性，接收的是一个数组，即我们可以在下面配好多个properties文件 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:properties/jdbc.properties</value>
+            </array>
+        </property>
+    </bean>
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+    <!-- 配置Mybatis工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- ============以下注册组件============== -->
+    <bean id="hashMap" class="java.util.HashMap"/>
+    <!--注册DAO组件-->
+    <bean id="loginDao" class="com.dao.impl.LoginDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="adminDao" class="com.dao.impl.AdminDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="readerDao" class="com.dao.impl.ReaderDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="essayDao" class="com.dao.impl.EssayDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="publishDao" class="com.dao.impl.PublishDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <!--注册Service组件-->
+    <bean id="loginService" class="com.service.impl.LoginServiceImpl">
+        <property name="loginDAO" ref="loginDao"/>
+    </bean>
+        <!--管理员信息服务-->
+    <bean id="adminService" class="com.service.impl.AdminServiceImpl">
+        <property name="adminDAO" ref="adminDao"/>
+        <property name="readerDAO" ref="readerDao"/>
+        <property name="essayDAO" ref="essayDao"/>
+        <property name="publishDAO" ref="publishDao"/>
+    </bean>
+    <bean id="verifyServiece" class="com.service.impl.VerifyServiceImpl">
+        <property name="essayDAO" ref="essayDao"/>
+    </bean>
+</beans>

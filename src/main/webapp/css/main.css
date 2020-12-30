@@ -1,0 +1,43 @@
+ul li{
+    list-style: none;
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: lightsteelblue;
+}
+li:hover{
+    background-color: cornflowerblue;
+}
+a:hover{
+    color: red;
+    text-decoration-color: brown;
+}
+a{
+    text-decoration-line: none;
+}
+#title{
+    align-content: end;
+    width: fit-content;
+}
+.tableHead{
+    background-color: aquamarine;
+    font-family: 楷体, serif;
+    color: black;
+    font-size: larger;
+    text-align: center;
+}
+
+.result{
+    background-color: snow;
+    text-align: center;
+    font-family: 楷体, serif;
+}
+#deleteBtn{
+    background-color:pink;
+}
+#detailBtn{
+    background-color: lightsteelblue;
+}

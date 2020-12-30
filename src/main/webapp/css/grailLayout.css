@@ -1,0 +1,45 @@
+body {
+    min-width: 550px;
+}
+
+#container {
+    padding-left: 200px;
+    padding-right: 150px;
+}
+
+#container .column {
+    float: left;
+}
+
+#left {
+    width: 150px;
+    margin-left: -100%;
+    position: relative;
+    right: 200px;
+    background-color: floralwhite;
+    height: 500px;
+}
+#left a,li {
+    color: black;
+    text-decoration: none;
+    list-style: none;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+#left a:hover {
+   color: coral;
+}
+#center {
+    width: 100%;
+}
+
+#right {
+    width: 150px;
+    margin-right: -150px;
+    background-color: darkgrey;
+}
+
+#footer {
+    clear: both;
+    background-color: darkgrey;
+}
