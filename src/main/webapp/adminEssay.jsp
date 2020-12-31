@@ -15,19 +15,20 @@
     <link rel="stylesheet" type="text/css" href="css/grailLayout.css"/>
     <link rel="stylesheet" type="text/css" href="css/ol.css"/>
     <link rel="stylesheet" type="text/css" href="css/inputStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mouse.css"/>
     <script rel="script" type="text/javascript"  src="js/delete.js"></script>
     <script rel="script" type="text/javascript"  src="js/verify.js"></script>
 </head>
 <body>
-
+<script rel="script" type="text/javascript"  src="js/mouse.js"></script>
 <div id="header">
     <h3 id="title">${sessionScope.grantName}:${sessionScope.nowUser.id} <a href="doLogout">【注销登陆】</a><hr></h3>
 </div>
 <div id="container">
     <div id="center" class="column">
         <!--条件查询框-->
-        <form action="#" method="post">
-            <label>查询条件:<input class="input" type="text" placeholder="请输入查询条件"/></label>
+        <form action="adminEssayByCondition" method="post">
+            <label>查询条件:<input class="input" type="text" name="condition" placeholder="请输入查询条件"/></label>
             <input class="input" type="submit" value="查询"/>
         </form>
         <!--批量处理框-->

@@ -17,6 +17,9 @@ function verifyConfirm() {
         alert("password error");
         return false;
     }
+}
 
 
+function my(){
+    alert("not develop!");
 }

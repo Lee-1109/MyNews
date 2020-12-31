@@ -28,4 +28,10 @@ public interface IVerifyService {
     List<Essay> listReviewByPage(HashMap<String,Object> map);
 
     boolean delete(String essayId);
+
+
+    List<Essay> listEssay();
+    List<Essay> listEssayByPage(HashMap<String,Object> map);
+    List<Essay> listEssayByCondition (HashMap<String,Object> map);
+    List<Essay> listEssayByConditionByPage(HashMap<String,Object> map);
 }

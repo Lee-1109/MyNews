@@ -15,10 +15,10 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class essayListVo implements Serializable {
+public class EssayListVo implements Serializable {
     private List<Essay> essayList;
 
-    public essayListVo() {this.essayList=new ArrayList<>(); }
+    public EssayListVo() {this.essayList=new ArrayList<>(); }
 
     boolean isEmpty(){
         return essayList.isEmpty();

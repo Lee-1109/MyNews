@@ -13,6 +13,7 @@
 <head>
     <title>${sessionScope.grantName}主页面</title>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mouse.css"/>
 </head>
 <body>
 <h3 id="title">${sessionScope.grantName}:${sessionScope.nowUser.id}<a href="doLogout">【注销登陆】</a><hr></h3>

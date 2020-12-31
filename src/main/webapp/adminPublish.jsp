@@ -14,19 +14,29 @@
     <link rel="stylesheet" type="text/css" href="css/table.css"/>
     <link rel="stylesheet" type="text/css" href="css/grailLayout.css"/>
     <link rel="stylesheet" type="text/css" href="css/inputStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mouse.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ol.css"/>
     <script rel="script" type="text/javascript"  src="js/delete.js"></script>
 </head>
 <body>
+<script rel="script" type="text/javascript"  src="js/mouse.js"></script>
 <div id="header">
     <h3 id="title">${sessionScope.grantName}:${sessionScope.nowUser.id} <a href="doLogout">【注销登陆】</a><hr></h3>
 </div>
 <div id="container">
     <div id="center" class="column">
         <!--条件查询框-->
-        <form action="#" method="post">
-            <label>查询条件:<input class="input" type="text" placeholder="请输入查询条件"/></label>
+        <form action="adminPublishByCondition" method="post">
+            <label>查询条件:<input class="input" type="text" name="condition" placeholder="请输入查询条件"/></label>
             <input class="input" type="submit" value="查询"/>
         </form>
+        <div>
+            <ol>
+                <li><img src="images/add.png" alt="添加"/><a href="#">添加出版社</a></li>
+                <li><img src="images/add.png" alt="批量添加"/><a href="#">批量添加</a></li>
+                <li><img src="images/delete.png" alt="批量删除"/><a href="#">批量封禁出版社</a></li>
+            </ol>
+        </div>
         <table>
             <tr class="tableHead">
                 <td>报社编号</td>
@@ -45,7 +55,7 @@
                         <td>${p.password}</td>
                         <td>${p.name}</td>
                         <td>${p.address}</td>
-                        <td><a href="#" class="updateBtn">变更</a></td>
+                        <td><a href="#" class="updateBtn">封禁</a></td>
                         <td><a href="#" class="deleteBtn" onclick=" return deleteBtn('${p.nid}')">删除</a></td>
                     </tr>
                 </c:forEach>

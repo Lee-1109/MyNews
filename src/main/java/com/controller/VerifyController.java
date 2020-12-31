@@ -44,16 +44,35 @@ public class VerifyController {
         String pageNow=request.getParameter("pageNow");
         if (null == pageNow) pageNow ="1";
         int pageN=Integer.parseInt(pageNow);//获取当前页
-        int totalPageCount=adminService.listEssay().size();
+        int totalPageCount=verifyService.listEssay().size();
         Page page=new Page(totalPageCount,pageN);
-        page.setPageSize(5);
+        page.setPageSize(8);
         //设置处理的URL
         map.put("url","adminEssay");
         map.put("page",page);
-        List<Essay> essays = adminService.listEssayByPage(map);
+        List<Essay> essays = verifyService.listEssayByPage(map);
         map.put("essays",essays);
         return "adminEssay";
     }
+
+    @RequestMapping("/adminEssayByCondition")
+    public String adminEssayByCondition(HttpServletRequest request, HashMap<String, Object> map){
+        String pageNow=request.getParameter("pageNow");
+        String condition = request.getParameter("condition");
+        map.put("condition","%"+condition+"%");
+        if (null == pageNow) pageNow ="1";
+        int pageN=Integer.parseInt(pageNow);//获取当前页
+        int totalPageCount=verifyService.listEssayByCondition(map).size();
+        Page page=new Page(totalPageCount,pageN);
+        page.setPageSize(8);
+        //设置处理的URL
+        map.put("url","adminEssayByCondition");
+        map.put("page",page);
+        List<Essay> essays = verifyService.listEssayByConditionByPage(map);
+        map.put("essays",essays);
+        return "adminEssay";
+    }
+
 
     @RequestMapping("/adminEssayReview")
     public String adminReVerifyEssay(HttpServletRequest request, HashMap<String, Object> map){
@@ -62,7 +81,7 @@ public class VerifyController {
         int pageN=Integer.parseInt(pageNow);//获取当前页
         int totalPageCount=verifyService.listReview().size();
         Page page=new Page(totalPageCount,pageN);
-        page.setPageSize(5);
+        page.setPageSize(8);
         map.put("url","adminEssayReview");
         map.put("page",page);
         map.remove("essays");

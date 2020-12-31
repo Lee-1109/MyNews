@@ -17,7 +17,10 @@ public interface IAdminDAO {
     List<Admin> listByPage(HashMap<String,Object> map);
     List<Admin> listByCondition(HashMap<String,Object> map);
     List<Admin> listByConditionByPage(HashMap<String,Object> map);
-    boolean insertAdmin(Admin admin);
-    boolean deleteAdmin(Admin admin);
+    boolean insert(Admin admin);
+    boolean insertList(List<Admin> admins);
+    boolean delete(Admin admin);
+    boolean deleteList(List<Admin> admins);
+    boolean update(Admin admin);
     boolean updateGrant(Admin admin);
 }

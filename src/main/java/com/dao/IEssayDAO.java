@@ -13,15 +13,10 @@ import java.util.List;
 
 public interface IEssayDAO {
     List<Essay> list();
-
     List<Essay> listByPage(HashMap<String,Object> map);
-
     List<Essay> listByCondition(HashMap<String,Object> map);
-
     List<Essay> listByConditionByPage(HashMap<String,Object> map);
-
     List<Essay> listReview();
-
     List<Essay> listReviewByPage(HashMap<String,Object> map);
 
     /**

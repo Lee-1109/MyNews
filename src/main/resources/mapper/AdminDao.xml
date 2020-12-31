@@ -19,7 +19,7 @@
     </select>
     <select id="selectByCondition" resultMap="admin">
         select ID,PASSWORD,GRANTS from admin
-        where ID like #{condition} or GRANTS like #{condition}
+        where ID like #{condition} or GRANTS like #{condition} order by GRANTS
     </select>
     <select id="selectByConditionByPage" resultMap="admin">
         select ID,PASSWORD,GRANTS from admin

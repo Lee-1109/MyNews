@@ -18,28 +18,22 @@ public class ReaderDaoImpl extends SqlSessionDaoSupport implements IReaderDAO {
     @Override
     public List<Reader> list() {
         List<Reader> readers = this.getSqlSession().selectList("com.model.Reader.selectList");
-        for (Reader reader:readers){
-            System.out.println(reader.toString());
-        }
         return readers;
     }
 
     @Override
     public List<Reader> listByPage(HashMap<String, Object> map) {
         List<Reader> readers = this.getSqlSession().selectList("com.model.Reader.selectListByPage",map);
-        for (Reader reader:readers){
-            System.out.println(reader.toString());
-        }
         return readers;
     }
 
     @Override
     public List<Reader> listByCondition(HashMap<String, Object> map) {
-        return this.getSqlSession().selectList("com.model.Reader.selectByCondition");
+        return this.getSqlSession().selectList("com.model.Reader.selectByCondition",map);
     }
 
     @Override
     public List<Reader> listByConditionByPage(HashMap<String, Object> map) {
-        return this.getSqlSession().selectList("com.model.Reader.selectByConditionByPage");
+        return this.getSqlSession().selectList("com.model.Reader.selectByConditionByPage",map);
     }
 }

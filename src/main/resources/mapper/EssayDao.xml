@@ -44,6 +44,22 @@
         where e.nid=p.NID and ev.aid=e.aid and ev.status = 0
         limit #{startPos},#{pageSize}
     </select>
+    <select id="selectByCondition" resultMap="extendEssay">
+        select e.aid, title, e.nid,NAME,content, post_Time
+        from essay e,publish p,essayverify ev
+        where e.nid=p.NID and ev.aid=e.aid and ev.status = 0
+                and title like #{condition} or content like #{condition} or NAME like #{condition}
+    </select>
+    <select id="selectByConditionByPage" resultMap="extendEssay">
+        select e.aid, title, e.nid,NAME,content, post_Time
+        from essay e,publish p,essayverify ev
+        where e.nid=p.NID and ev.aid=e.aid and ev.status = 0
+                and title like #{condition}
+           or content like #{condition}
+           or NAME like #{condition}
+           or post_Time like #{condition}
+        limit #{startPos},#{pageSize}
+    </select>
 
     <select id="selectVerifyed" resultMap="extendVerifyEssay">
         select e.aid, title, e.nid,NAME,content, post_Time,a.ID,verifyTime
@@ -58,25 +74,6 @@
         limit #{startPos},#{pageSize}
     </select>
 
-    <select id="selectByCondition" resultMap="extendEssay">
-        select e.aid, title, e.nid,NAME,content, post_Time
-        from essay e,publish p,essayverify ev
-        where e.nid=p.NID and ev.aid=e.aid and ev.status = 0
-            and title like #{condition}
-           or content like #{condition}
-           or NAME like #{condition}
-           or post_Time like #{condition}
-    </select>
-    <select id="selectByConditionByPage" resultMap="extendEssay">
-        select e.aid, title, e.nid,NAME,content, post_Time
-        from essay e,publish p,essayverify ev
-        where e.nid=p.NID and ev.aid=e.aid and ev.status = 0
-                and title like #{condition}
-           or content like #{condition}
-           or NAME like #{condition}
-           or post_Time like #{condition}
-        limit #{startPos},#{pageSize}
-    </select>
     <update id="updateVerify">
         update essayverify set status=#{status},doAdmin=#{doAdminId} where aid=#{essayId}
     </update>

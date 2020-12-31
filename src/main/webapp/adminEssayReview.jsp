@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/grailLayout.css"/>
     <link rel="stylesheet" type="text/css" href="css/ol.css"/>
     <link rel="stylesheet" type="text/css" href="css/inputStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mouse.css"/>
     <script rel="script" type="text/javascript"  src="js/delete.js"></script>
     <script rel="script" type="text/javascript"  src="js/verify.js"></script>
 </head>

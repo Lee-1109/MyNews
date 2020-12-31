@@ -3,7 +3,6 @@ package com.dao.impl;
 import com.dao.IEssayDAO;
 import com.model.Essay;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,29 +17,27 @@ public class EssayDaoImpl extends SqlSessionDaoSupport implements IEssayDAO {
     @Override
     public List<Essay> list() {
         List<Essay> essays = this.getSqlSession().selectList("com.model.Essay.selectList");
-        for (Essay essay : essays){
-            System.out.println("EssayDaoImpl:"+essay.toString());
-        }
         return essays;
     }
 
     @Override
     public List<Essay> listByPage(HashMap<String, Object> map) {
         List<Essay> essays = this.getSqlSession().selectList("com.model.Essay.selectListByPage",map);
-        for (Essay essay : essays){
-            System.out.println("EssayDaoImpl:"+essay.toString());
-        }
         return essays;
     }
 
     @Override
     public List<Essay> listByCondition(HashMap<String, Object> map) {
-        return this.getSqlSession().selectList("com.model.Essay.selectByCondition");
+        List<Essay> essays = this.getSqlSession().selectList("com.model.Essay.selectByCondition",map);
+        for (Essay essay: essays){
+            System.out.println("listByCondition essay"+essay.toString());
+        }
+        return essays;
     }
 
     @Override
     public List<Essay> listByConditionByPage(HashMap<String, Object> map) {
-        return this.getSqlSession().selectList("com.model.Essay.selectByConditionByPage");
+        return this.getSqlSession().selectList("com.model.Essay.selectByConditionByPage",map);
     }
 
     @Override

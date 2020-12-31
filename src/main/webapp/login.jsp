@@ -4,6 +4,7 @@
 <head>
     <title>新闻信息管理员登陆界面</title>
     <link rel="stylesheet" type="text/css" href="css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mouse.css"/>
 </head>
 <body>
 <header>新闻信息管理系统-管理端</header>

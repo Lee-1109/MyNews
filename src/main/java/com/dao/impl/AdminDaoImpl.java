@@ -3,8 +3,6 @@ package com.dao.impl;
 import com.dao.IAdminDAO;
 import com.model.Admin;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.springframework.stereotype.Repository;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,11 +57,22 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements IAdminDAO {
      * @return
      */
     @Override
-    public boolean insertAdmin(Admin admin) {
+    public boolean insert(Admin admin) {
         int type=admin.getGrants();//获取权限
         String using=(type==0)?"insertSuper":(type==1)?"insertAdmin":"insertDefault";
         return (this.getSqlSession().insert("com.model.Admin."+using,admin) != 0);
 
+    }
+
+    @Override
+    public boolean insertList(List<Admin> admins) {
+        for(Admin admin : admins){
+            if(!insert(admin)){
+                //如果出错，此处记录错误日志
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -72,9 +81,29 @@ public class AdminDaoImpl extends SqlSessionDaoSupport implements IAdminDAO {
      * @return
      */
     @Override
-    public boolean deleteAdmin(Admin admin) {
+    public boolean delete(Admin admin) {
         String adminId=admin.getId();
         return (this.getSqlSession().delete("com.model.Admin.deleteAdmin",adminId) != 0);
+    }
+
+    /**
+     * 批量删除管理员
+     * @param admins
+     * @return
+     */
+    @Override
+    public boolean deleteList(List<Admin> admins) {
+        for(Admin admin : admins){
+            if(!delete(admin))
+                //--》待完善此处记录错误
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean update(Admin admin) {
+        return this.getSqlSession().update("com.model.Admin.update",admin) != 0;
     }
 
     /**

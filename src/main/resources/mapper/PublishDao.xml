@@ -14,13 +14,13 @@
     <select id="selectList" resultMap="publish">
         select NID, PASSWORD, NAME, ADDRESS from publish
 	</select>
-    <select id="listPublishByPage" resultMap="publish">
+    <select id="selectByPage" resultMap="publish">
         select NID, PASSWORD, NAME, ADDRESS from publish limit #{startPos},#{pageSize}
     </select>
 
     <select id="selectByCondition" resultMap="publish">
         select NID, PASSWORD, NAME, ADDRESS from publish p
-        where p.NAME like #{condition} or p.ADDRESS like #{condition}
+        where P.NID LIKE #{condition} or p.NAME like #{condition} or p.ADDRESS like #{condition}
     </select>
 
     <select id="selectByConditionByPage" resultMap="publish">

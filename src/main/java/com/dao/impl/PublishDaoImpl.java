@@ -18,20 +18,20 @@ public class PublishDaoImpl extends SqlSessionDaoSupport implements IPublishDAO 
     @Override
     public List<Publish> list() {
         List<Publish> publishes =  this.getSqlSession().selectList("com.model.Publish.selectList");
-        for (Publish publish:publishes){
-            System.out.print("PublishDaoImpl_select:");
-            System.out.println(publish.toString());
-        }
         return publishes;
     }
 
     @Override
     public List<Publish> listByPage(HashMap<String,Object> map) {
-        return this.getSqlSession().selectList("com.model.Publish.listPublishByPage",map);
+        return this.getSqlSession().selectList("com.model.Publish.selectByPage",map);
     }
 
     @Override
     public List<Publish> listByCondition(HashMap<String, Object> map) {
+        List<Publish> publishes = this.getSqlSession().selectList("com.model.Publish.selectByCondition",map);
+        for (Publish publish: publishes) {
+            System.out.println("PublishDao_listByCondition:"+publish.toString());
+        }
         return this.getSqlSession().selectList("com.model.Publish.selectByCondition",map);
     }
 

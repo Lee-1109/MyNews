@@ -31,10 +31,14 @@ public interface IAdminService {
     List<Admin> listAdminByConditionByPage(HashMap<String,Object> map);
     List<Reader> listReader();
     List<Reader> listReaderByPage(HashMap<String,Object> map);
-    List<Essay> listEssay();
-    List<Essay> listEssayByPage(HashMap<String,Object> map);
+    List<Reader> listReaderByCondition(HashMap<String,Object> map);
+    List<Reader> listReaderByConditionByPage(HashMap<String,Object> map);
     List<Publish> listPublish();
     List<Publish> listPublishByPage(HashMap<String,Object> map);
+    List<Publish> listPublishByCondition(HashMap<String,Object> map);
+    List<Publish> listPublishByConditionByPage(HashMap<String,Object> map);
+    //批量删除
+    boolean deleteList(HashMap<String,Object> map);
 
 
 

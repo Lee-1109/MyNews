@@ -10,8 +10,8 @@ import com.model.Publish;
 import com.model.Reader;
 import com.service.IAdminService;
 import com.util.Page;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -76,23 +76,21 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public List<Admin> listAdminByCondition(HashMap<String,Object> map) {
+    public List<Admin> listAdminByCondition( HashMap<String,Object> map) {
         return adminDAO.listByCondition(map);
     }
 
     @Override
     public List<Admin> listAdminByPage(HashMap<String,Object> map) {
-        Page page= (Page) map.get("page");
-        map.put("startPos",page.getStartPos());
-        map.put("pageSize",page.getPageSize());
+        map = initQuery(map);
         return adminDAO.listByPage(map);
     }
 
     @Override
     public List<Admin> listAdminByConditionByPage(HashMap<String, Object> map) {
-        Page page= (Page) map.get("page");
-        map.put("startPos",page.getStartPos());
-        map.put("pageSize",page.getPageSize());
+        String condition = (String) map.get("condition");
+        map.put("condition","%"+condition+"%");
+        map = initQuery(map);
         return adminDAO.listByConditionByPage(map);
     }
 
@@ -108,34 +106,33 @@ public class AdminServiceImpl implements IAdminService {
     @Override
     public List<Reader> listReaderByPage(HashMap<String, Object> map) {
         //展示page页的管理员信息
-        Page page= (Page) map.get("page");
-        map.put("startPos",page.getStartPos());
-        map.put("pageSize",page.getPageSize());
+        map = initQuery(map);
         return readerDAO.listByPage(map);
+    }
+
+    @Override
+    public List<Reader> listReaderByCondition(HashMap<String, Object> map) {
+        List<Reader> readers = readerDAO.listByCondition(map);
+        for (Reader reader : readers){
+            System.out.println("listReaderByCondition:"+"    reader:"+reader.getUsername());
+        }
+        return readers;
+    }
+
+    @Override
+    public List<Reader> listReaderByConditionByPage(HashMap<String, Object> map) {
+        map = initQuery(map);
+        List<Reader> readers = readerDAO.listByConditionByPage(map);
+        for (Reader reader : readers){
+            System.out.println("listReaderByConditionByPage"+"reader"+reader.toString());
+        }
+        return readerDAO.listByConditionByPage(map);
     }
 
     /**
      * 获取所有文章
      * @return
      */
-    @Override
-    public List<Essay> listEssay() {
-        return essayDAO.list();
-    }
-
-    /**
-     * 分页获取所有文章
-     * @param map map包含了所有参数
-     * @return 文章列表
-     */
-    @Override
-    public List<Essay> listEssayByPage(HashMap<String, Object> map) {
-        //展示page页的管理员信息
-        Page page= (Page) map.get("page");
-        map.put("startPos",page.getStartPos());
-        map.put("pageSize",page.getPageSize());
-        return essayDAO.listByPage(map);
-    }
 
     /**
      * 获取所有出版社
@@ -149,9 +146,37 @@ public class AdminServiceImpl implements IAdminService {
     @Override
     public List<Publish> listPublishByPage(HashMap<String,Object> map) {
         //展示page页的管理员信息
+        map = initQuery(map);
+        return publishDAO.listByPage(map);
+    }
+
+    @Override
+    public List<Publish> listPublishByCondition(HashMap<String, Object> map) {
+        return publishDAO.listByCondition(map);
+    }
+
+    @Override
+    public List<Publish> listPublishByConditionByPage(HashMap<String, Object> map) {
+        map = initQuery(map);
+        return publishDAO.listByConditionByPage(map);
+    }
+
+    /**
+     * 批量删除管理员列表
+     * @param map
+     * @return
+     */
+    @Override
+    public boolean deleteList(HashMap<String, Object> map) {
+        List<Admin> admins = (List<Admin>) map.get("adminList");
+        return adminDAO.deleteList(admins);
+
+    }
+
+    private HashMap<String,Object> initQuery(HashMap<String,Object> map){
         Page page= (Page) map.get("page");
         map.put("startPos",page.getStartPos());
         map.put("pageSize",page.getPageSize());
-        return publishDAO.listByPage(map);
+        return map;
     }
 }

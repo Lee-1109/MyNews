@@ -6,7 +6,6 @@ import com.model.Essay;
 import com.service.IVerifyService;
 import com.util.Page;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +61,41 @@ public class VerifyServiceImpl implements IVerifyService {
     @Override
     public boolean delete(String essayId) {
         return essayDAO.deleteEssay(essayId);
+    }
+
+    @Override
+    public List<Essay> listEssay() {
+        return essayDAO.list();
+    }
+
+    /**
+     * 分页获取所有文章
+     * @param map map包含了所有参数
+     * @return 文章列表
+     */
+    @Override
+    public List<Essay> listEssayByPage(HashMap<String, Object> map) {
+        //展示page页的管理员信息
+        map = initQuery(map);
+        return essayDAO.listByPage(map);
+    }
+
+    @Override
+    public List<Essay> listEssayByCondition(HashMap<String, Object> map) {
+        return essayDAO.listByCondition(map);
+    }
+
+    @Override
+    public List<Essay> listEssayByConditionByPage(HashMap<String, Object> map) {
+        map = initQuery(map);
+        return essayDAO.listByConditionByPage(map);
+    }
+
+    private HashMap<String,Object> initQuery(HashMap<String,Object> map){
+        Page page= (Page) map.get("page");
+        map.put("startPos",page.getStartPos());
+        map.put("pageSize",page.getPageSize());
+        return map;
     }
 
 
